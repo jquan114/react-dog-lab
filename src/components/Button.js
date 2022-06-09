@@ -6,7 +6,7 @@ function Button(props) {
     };
     return(
         <button type="button" onClick={handleSubmit}> 
-        Make Api Call Again
+       Get Random Dog
         </button>
     );
 };

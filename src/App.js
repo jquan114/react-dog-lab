@@ -2,30 +2,30 @@ import logo from './logo.svg';
 import React, {useState} from 'react';
 import './App.css';
 import Button from "./components/Button";
-import Gifs from "./components/Gifs";
+import Dogs from "./components/Dogs";
 
 function App() {
-const [gifSrc,setGifSrc] = useState({});
+  ////use state
+const [info,setInfo] = useState({});
 
 const handleSubmit = async () => {
-  const myKey = "W9ThL38OlmMnIif0P13v036495Y4OMVA";
-  const gifSrc = `https://api.giphy.com/v1/gifs/random?api_key=${myKey}`;
+  const api_Endpoint = `https://dog.ceo/api/breeds/image/random`;
 
-  let res = await fetch(gifSrc);
-  let json = await res.json();
-  console.log("adding url", json.data.image_url);
-  setGifSrc(json.data);
+  let res = await fetch(api_Endpoint);
+  let data = await res.json();
+  console.log("adding url", data.message);
+  setInfo(data.message);
 }
-
+//render//
   return (
   <div className="App">
-      <h1> Giphy</h1>
+      <h1> Get Random Dog Photo Generator</h1>
       <Button handleSubmitFromApp={handleSubmit} />
       {/* CONDITIONAL RENDERING */}
-      {gifSrc.image_url ?
-      <Gifs gifSrc={gifSrc} />
+      {info ?
+      <Dogs propDog={info} />
         :
-      <h2>Pull random gifs from Giphy</h2>
+      <h2>Pull random dogs from and API</h2>
      }
 </div>
   );
